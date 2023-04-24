@@ -43,11 +43,13 @@ const App = () => {
     }
     const Next = ()=>{
          setIndex(index + 1)
-         setcurrentSong(songs[index % songs.length])
+          setcurrentSong(songs[index % songs.length])
         //  if(index >= songs.length-1){
         //    setIndex(0)
         //  }
-      if(isplaying){
+        if(isplaying) 
+             
+      {
         const playpromsie = audioRef.current.play()
         if(playpromsie !== undefined){
          playpromsie.then((audio)=>{
@@ -58,11 +60,13 @@ const App = () => {
     }
     const Back = ()=>{
          setIndex(index - 1)
-         setcurrentSong(songs[index])
+           setcurrentSong(songs[index])
          if(index<=0){
          setIndex(songs.length-1)
          }
-         if(isplaying){
+         if(isplaying) 
+            
+         {
           const playpromsie = audioRef.current.play()
           if(playpromsie !== undefined){
            playpromsie.then((audio)=>{
@@ -88,12 +92,23 @@ const App = () => {
        setSongs(newsSong)
 
     },[currentSong])
+    const SongHandler =  ()=>{
+      setIndex(index + 1)
+        setcurrentSong(songs[index % songs.length])
+    if(isplaying){
+    const playpromsie = audioRef.current.play()
+    if(playpromsie !== undefined){
+     playpromsie.then((audio)=>{
+       audioRef.current.play()
+     })
+    }
+    }}
     
   return (
-    <div>
+    <div >
       <Songs currentSong={currentSong} />
       <Player Back={Back} Next={Next} UpdateTimeOfInput={UpdateTimeOfInput} setTimeInput={setTimeInput} timeInput={timeInput} Randomfunction={Randomfunction} songInfo={songInfo} setIsplaying={setIsplaying} isplaying={isplaying} audioRef={audioRef} />
-      <audio onTimeUpdate={TimeUpdate} onLoadedMetadata={TimeUpdate} ref={audioRef} src={currentSong.audio}></audio>
+      <audio onEnded={SongHandler} onTimeUpdate={TimeUpdate} onLoadedMetadata={TimeUpdate} ref={audioRef} src={currentSong.audio}></audio>
       <Library toggle={toggle} setSongs={setSongs} SelectAudio={SelectAudio} songs={songs}/>
       <Nav toggle={toggle} setToggle={setToggle}/>
     </div>
