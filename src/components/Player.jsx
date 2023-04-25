@@ -14,7 +14,7 @@ const Player = ({audioRef,isplaying,setIsplaying,songInfo,Randomfunction,setTime
     }
   }
   return (
-    <div className='min-h-[20vh]   flex flex-col items-center justify-around'>
+    <div className='mt-6 md:mt-0 min-h-[25vh]   flex flex-col items-center justify-around'>
        <div className='w-[90%] md:w-[50%] flex items-center  p-3'>
         <h3 className='text-center text-sm'>{Randomfunction(songInfo.currentTime)}</h3>
        {/* <div className='bg-gray-300 w-full h-6 relative rounded-md'> */}
